@@ -1,0 +1,41 @@
+consulta 1:
+SELECT 
+  ship_mode AS Tipo_Envio,
+  ROUND(AVG(SAFE_CAST(dias_envio AS FLOAT64)), 1) AS Promedio_Dias_Espera,
+  COUNT(*) AS Total_Pedidos
+FROM `logistica_global.ventas`
+GROUP BY 1
+ORDER BY 2;
+
+Consulta 2:
+SELECT 
+  country AS Pais,
+  ROUND(SUM(SAFE_CAST(profit AS FLOAT64)), 2) AS Beneficio_Total,
+  ROUND(SUM(SAFE_CAST(sales AS FLOAT64)), 2) AS Ventas_Totales,
+  
+  ROUND((SUM(SAFE_CAST(profit AS FLOAT64)) / NULLIF(SUM(SAFE_CAST(sales AS FLOAT64)), 0)) * 100, 2) AS Margen_Porcentaje
+
+FROM `logistica_global.ventas`
+GROUP BY 1
+HAVING Beneficio_Total < 0 
+ORDER BY Beneficio_Total ASC -- Orden ascendente para ver las pérdidas más grandes primero
+LIMIT 10;
+
+
+CONSULTA 3:
+CREATE OR REPLACE VIEW `logistica_global.ventas_dashboard` AS
+SELECT
+  order_date,
+  ship_date,
+  ship_mode,
+  country,
+  city,
+  state,
+  category,
+  sub_category,
+  product_name,
+  SAFE_CAST(sales AS FLOAT64) AS sales,
+  SAFE_CAST(quantity AS INT64) AS quantity,
+  SAFE_CAST(profit AS FLOAT64) AS profit,
+  SAFE_CAST(dias_envio AS FLOAT64) AS dias_envio 
+FROM `logistica_global.ventas`;
