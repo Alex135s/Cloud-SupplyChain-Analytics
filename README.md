@@ -17,7 +17,6 @@ Este proyecto no corre en local, sino en la arquitectura Cloud de Google:
 
 ## 📸 Dashboard (Looker Studio)
 ![Dashboard Looker](Dashboard_Looker.png)
-*(Asegúrate de que tu imagen se llame igual que esto)*
 
 ---
-*Proyecto de Ingeniería de Datos realizado por [Tu Nombre] - Geremy Hernandez*
+*Proyecto de Ingeniería de Datos realizado por Geremy Hernandez
